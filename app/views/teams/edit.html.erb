@@ -1,0 +1,41 @@
+<h1>Editing Team</h1>
+
+<%= form_for(@team) do |f| %>
+  <% if @team.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
+
+      <ul>
+      <% @team.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.text_field :name,placeholder: "Name" %>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :manager, placeholder: "Manager Name" %>
+  </div>
+    
+      <div class="field margin30bot">
+        
+        Reselect Users <%= f.collection_select(:userss, @users, :id, :name,{:prompt => "--reselect User--"},{ :include_blank => true, :multiple => true, :size => 5}) %>
+      </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+<script type="text/javascript">
+    $('#team_userss').multiselect()
+</script>
+
+
+<%= link_to 'Show', @team %> |
+<%= link_to 'Back', teams_path %>

@@ -1,0 +1,64 @@
+
+<div class="marginbot50"></div>
+<div class="top_header">
+<div class="profile_img team_img"> 
+	<img src=<%= image_path("team.png")%> class="user_img">
+</div>
+<div class="user_details mt50">
+  <div class-"user_name">
+    Team Name &nbsp;&nbsp;&nbsp;&nbsp;: <%= @team.name %>
+  </div>
+
+  <div class="user_empid">
+    Manager Name &nbsp;: <%= @team.manager %>
+  </div>
+
+  <div class="user_empid">
+    Total Members&nbsp;: <%= @userdetail.length %>
+  </div>
+
+</div>
+</div>
+<div style="clear:both;"></div>
+<div class="field edit_team">
+	<% if  current_user.category == 'Admin' %>
+	<%= link_to 'Edit Team', edit_team_path(@team) %>
+	<% end %>
+</div>
+<hr>
+
+<% if @userdetail.length > 0 %>
+	<div class="members">Members in Team</div>
+	<% @userdetail.each do |us| %>
+		<div class="marginbot50"></div>
+		<div class="profile_img"> 
+			<img src=<%= image_path("user.png")%> class="user_img">
+		</div>
+		<div class="user_details">
+
+		  <div class-"user_name">
+		    Name : <%= us.name %>
+		  </div>
+
+		  <div class="user_empid">
+		    Empid: <%= us.empid %>
+		  </div>
+
+		  <div class="user_email">
+		    Email: <%= us.email %>
+		  </div>
+
+		  <div class="user_dob">
+		    Born : <%= us.dateofbirth %>
+		  </div>
+		</div>
+		<div style="clear:both;"></div>
+
+	<%end%>
+	<%else%>
+	<div class="members">No Members</div>
+<% end %>
+<hr>
+
+
+

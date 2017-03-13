@@ -1,0 +1,52 @@
+<h3 class="margin30bot">Signup New</h3>
+
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% debug @teams %>
+
+  <div class="field">
+    <%= f.text_field :name, placeholder: "Name" %>
+  </div>
+  <div class="field reduceWidth alignLeft">
+    
+    <%= f.text_field :empid, placeholder: "Emp Id"  %>
+  </div>
+  <div class="field margin30bot padding10top">
+    <%= f.select :gender,  User::GENDER_TYPES %>
+    <%= f.select :category,  User::CATEGORY_TYPES %>
+  </div>
+
+  <div style="clear:both;"></div>
+  <div class="field margin30bot padding10top">
+    <%= f.label :DOB %>
+    <%= f.date_select :dateofbirth %>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :email, placeholder: "Email Id" %>
+  </div>
+  <div class="field">
+    <%= f.password_field :password,placeholder: "Password"  %>
+  </div>
+  <div class="field">
+    <%= f.password_field :password_confirmation, placeholder: "Confirm Password"  %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+
+

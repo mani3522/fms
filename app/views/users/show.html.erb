@@ -1,0 +1,196 @@
+
+<% if @pending_invites > 0 && current_user.id == params[:id].to_i %>
+  <div class="alert alert-info" id="notification_invite"> Note: You have <%= @pending_invites %> pending event accept invitation</div> 
+<%end%>
+
+
+<%= form_for(@user) do |f| %>
+<div class="marginbot50"></div>
+<div class="">
+  <div class="profile_img">
+    <% if @user.gender == "Male"%> 
+  	 <img src=<%= image_path("user_profile.png")%> class="user_img">
+     <% else %>
+     <img src=<%= image_path("female_user.png")%> class="user_img">
+     <% end %>
+  </div>
+  <div class="user_details">
+
+    <div class-"user_name">
+      <span class="small_case">Name :</span> <%= @user.name.upcase %>
+    </div>
+
+    <div class="user_empid">
+      <span class="small_case">Empid:</span> <%= @user.empid.upcase %>
+    </div>
+
+    <div class="user_email">
+      <span class="small_case">Email:</span> <%= @user.email %>
+    </div>
+
+    <div class="user_dob">
+      <span class="small_case">Born :</span> <%= @user.dateofbirth.strftime("%b %d %Y") %>
+    </div>
+  </div>
+</div>
+
+<div style="clear:both;"></div>
+<div class="field edit_user_link">
+  <% if  defined? current_user && current_user.id == @user.id %>
+    <%= link_to 'Edit User', edit_user_path(@user) %>
+  <%end%>
+</div>
+
+<hr>
+
+
+<% if @all_event_details.length > 0 %>
+  <div class="members">Events List <span class="reduceFont"> - Ordered with early start to finish </span></div>
+  <% @all_event_details.each do |us| %>
+
+    <div class="marginbot50"></div>
+    <div class="profile_img"> 
+      <img src=<%= image_path("event.jpg")%> class="user_img">
+    </div>
+    <div class="user_details">
+      <div class-"user_name">
+        <strong><%= link_to us.name, us %></strong> is scheduled at <%= us.venue %> on <%= us.startime %> and ending at: <%= us.endtime %> with amount of <%= us.amount %> <br>
+      </div>
+      <br />
+      <%if us.endtime < DateTime.now%>
+          <div class="status_archived" id='<%= us.id %>'>
+          <img src=<%= image_path("archive.png")%> class="user_img_archive"> Archived
+        </div>
+
+      <% elsif @event_accepts[us.id] == 0 && current_user.id == @user.id %>
+        <div class="status_actions">
+          <button type="button" class="btn btn-success" id='<%= us.id %>'>Accept</button>
+          <button type="button" class="btn btn-danger" id='<%= us.id %>'>Decline</button>
+        </div>
+      <% elsif (@event_accepts[us.id] == 1) %>
+        <div class="status_accepted" id='<%= us.id %>'>
+          <div class="user_img_accept"> </div>
+            Accepted <span class="change_action">Change</span>
+          
+        </div>
+      <% elsif (@event_accepts[us.id] == 2)%>
+        <div class="status_declined" id='<%= us.id %>'>
+          <div class="user_img_decline">  </div>
+          Declined <span class="change_action">Change</span>
+        </div>
+
+      <%end%>
+    </div>
+    <div style="clear:both;"></div>
+
+  <%end%>
+  <%else%>
+  <div class="members">No Events</div>
+<% end %>
+
+<hr>
+<% end %>
+
+<script type="text/javascript">
+var t;
+
+$('.btn-success').click(function() {
+  var id = this.id
+  var parent = this.closest('div')
+
+
+  t =  '<div class="status_accepted"> <div class="user_img_accept"> </div>Accepted</div>'
+  
+
+  $.ajax({
+      type : "POST",
+      url  : "/users/user_event_handle",
+      data : {
+        'event_id': id,
+        'user_id': <%= current_user.id%>,
+        'status': 1
+      },
+      success: function(msg) {
+        parent.innerHTML = t
+      }
+  });
+});
+
+$('.btn-danger').click(function() {
+  var id = this.id
+  var parent = this.closest('div')
+
+  t =  '<div class="status_declined"> <div class="user_img_decline">  </div>Declined</div>'
+  
+  $.ajax({
+      type : "POST",
+      url  : "/users/user_event_handle",
+      dataType: "json",
+      data : {
+        'event_id': id,
+        'user_id': <%= current_user.id%>,
+        'status': 2
+      },
+      success: function(msg) {
+            parent.innerHTML = t
+      }
+  });
+});
+
+
+$('.change_action').click(function() {
+  console.log("Clcked change action");
+  t = this
+  var id = this.parentElement.id
+  var change_classname = this.parentElement.className
+  var status_value = 0;
+  var change_msg;
+  var x= this;
+
+  if(change_classname == "status_accepted") {
+    status_value = 2;
+    change_msg = '<div class="user_img_decline">  </div><span class="colorR">Declined</span>'
+  } else if (change_classname == "status_declined") {
+    status_value = 1;
+    change_msg = '<div class="user_img_accept"> </div><span class="colorG">Accepted</span>'
+  }
+
+  $.ajax({
+      type : "POST",
+      url  : "/users/user_event_handle",
+      dataType: "json",
+      data : {
+        'event_id': id,
+        'user_id': <%= current_user.id%>,
+        'status': status_value
+      },
+      success: function(msg) {
+          console.log(msg)
+          t.parentElement.innerHTML = change_msg
+      }
+  });
+
+  // var addele = "<button type='button' class='btn btn-success' id='"+ id + "'>Accept</button><button type='button' class='btn btn-danger' id='"+id+"'>Decline</button>"
+
+  // t.parentElement.innerHTML = addele ;
+});
+
+
+(function($)
+{
+    var oldHtml = $.fn.html;
+    $.fn.html = function()
+    {
+        var ret = oldHtml.apply(this, arguments);
+
+        //trigger your event.
+        this.trigger("click");
+
+        return ret;
+    };
+})(jQuery);
+
+setTimeout(function() {
+    $("#notification_invite").hide()
+}, 5000);
+</script>

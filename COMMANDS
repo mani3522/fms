@@ -1,0 +1,112 @@
+bin/rails generate scaffold Event name:string startime:datetime endtime:datetime amount:integer venue:string
+
+
+
+bin/rails generate scaffold Team name:string manager:string
+
+
+
+
+bin/rails generate scaffold User name:string empid:string dateofbirth:date gender:string
+
+
+
+bin/rails generate controller login
+
+rails generate migration add_email_to_users email:string
+rails generate migration add_password_digest_to_users password_digest:string
+
+rails generate migration add_status_to_eventusers status:integer
+Eventuser.column_names
+
+rails generate migration add_index_to_users_email
+rails generate migration add_index_to_users_email
+
+
+Adding table
+-------------
+rails generate model Teamevent team_id:integer event_id:integer
+rails generate model Teamuser team_id:integer user_id:integer
+rails generate model Eventuser event_id:integer user_id:integer
+
+rake db:migrate
+
+db migrate
+-----------
+add_index :teamusers, [:user_id, :created_at]
+
+
+User.delete_all
+
+rails generate migration add_team_id_to_users team_id:integer
+
+
+
+rails generate migration add_type_to_users type:integer
+
+
+
+
+column structure
+--------
+
+
+2.3.0 :049 >   User.column_names
+ => ["id", "name", "empid", "dateofbirth", "gender", "created_at", "updated_at", "email", "password_digest"] 
+
+
+
+2.3.0 :060 >   Team.column_names
+ => ["id", "name", "manager", "created_at", "updated_at"] 
+
+
+
+2.3.0 :070 >   Event.column_names
+ => ["id", "name", "startime", "endtime", "amount", "venue", "created_at", "updated_at"] 
+
+
+
+2.3.0 :075 > Eventuser.column_names
+ => ["id", "event_id", "user_id", "created_at", "updated_at"] 
+
+
+
+2.3.0 :077 >   Teamuser.column_names
+ => ["id", "team_id", "user_id", "created_at", "updated_at"] 
+
+
+2.3.0 :078 > Teamevent.column_names
+ => ["id", "team_id", "event_id", "created_at", "updated_at"] 
+2.3.0 :079 > 
+
+
+
+
+
+---------
+
+
+
+User.create(name: "Selvakumar",empid:"e0856", "dateofbirth")
+
+
+
+
+Teamuser.create(team_id: 9,user_id:11)
+Teamuser.create(team_id: 9,user_id:12)
+Teamuser.create(team_id: 9,user_id:13)
+Teamuser.create(team_id: 9,user_id:14)
+Teamuser.create(team_id: 9,user_id:15)
+
+
+
+Teamuser.where(team_id: @ids).group(:team_id).count
+
+
+
+remove column directly from rails console ..
+ActiveRecord::Migration.remove_column :users, :category
+
+
+User.column_for_attribute('category').type
+

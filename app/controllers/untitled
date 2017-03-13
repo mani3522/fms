@@ -1,0 +1,5 @@
+Eventuser.joins("LEFT OUTER JOIN events ON eventusers.event_id = events.id").where('user_id = 11').order('events.startime')
+
+
+
+Eventuser.select('eventusers.event_id,events.startime').joins("LEFT OUTER JOIN events ON events.id = eventusers.event_id").where('user_id = 11').order('events.startime')

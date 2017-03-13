@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Freshevent</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <link href="https://fonts.googleapis.com/css?family=Rasa|Roboto+Slab" rel="stylesheet">
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div style="width:900px;margin:auto">
+
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      
+      
+      <%= link_to 'FreshEvent', current_user , class: "navbar-brand"%>
+    </div>
+
+    
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Teams <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to 'Show All Teams', teams_path%></li>
+            
+            <%if current_user.category == 'Admin'%>
+                <li role="separator" class="divider"></li>
+                <li><%= link_to 'Add New Team', new_team_path %></li>
+            <%end%>
+            
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to 'Show All Users', users_path%></li>
+            <!-- <li role="separator" class="divider"></li> -->
+            <!-- <li><%= link_to 'Add New User', new_user_path %></li> -->
+            
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to 'Show All Events', events_path%></li>
+            <%if current_user.category == 'Admin'%>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'Add New Event', new_event_path %></li>
+            <% end %>
+          </ul>
+        </li>
+
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >
+            <%= current_user.name %> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to 'View Profile', current_user %></li>
+            <li><a href="#">Change Password</a></li>
+            <li role="separator" class="divider"></li>
+            <li><%= link_to 'Logout', logout_path %></a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div id ="time_div">
+  <%= Time.now.strftime("%a %b") %> <%= Time.now.day%> <%= Time.now.year%> 
+  <span id ="clock"></span>
+</div>
+<%= flash_messages %>
+<%= yield %>
+
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+function updateClock ( )
+  {
+  var currentTime = new Date ( );
+    var currentHours = currentTime.getHours ( );
+    var currentMinutes = currentTime.getMinutes ( );
+    var currentSeconds = currentTime.getSeconds ( );
+
+    // Pad the minutes and seconds with leading zeros, if required
+    currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
+    currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
+
+    // Choose either "AM" or "PM" as appropriate
+    var timeOfDay = ( currentHours < 12 ) ? "AM" : "PM";
+
+    // Convert the hours component to 12-hour format if needed
+    currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours;
+
+    // Convert an hours component of "0" to "12"
+    currentHours = ( currentHours == 0 ) ? 12 : currentHours;
+
+    // Compose the string for display
+    var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+    
+    
+    $("#clock").html(currentTimeString);
+        
+ }
+
+$(document).ready(function()
+{
+   //setInterval('updateClock()', 1000);
+});
+
+</script>

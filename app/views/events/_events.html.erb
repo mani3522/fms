@@ -1,0 +1,32 @@
+<table class="table-fill margintop30">
+  <thead>
+    <tr>
+      <th class="text-left"><%= sortable "name","Name"%></th>
+      <th class="text-left"><%= sortable "startime","Starttime"%></th>
+      <th class="text-left"><%= sortable "endtime","Endtime"%></th>
+      <th class="text-left"><%= sortable "amount","Amount"%></th>
+      <th class="text-left">Venue</th>
+      <% if current_user.category == "Admin" %>
+        <th colspan="2" class= "alignCenter"> Actions</th>
+      <%end%>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        
+        <td class="text-left"><%= link_to event.name, event %></td>
+        <td class="text-left"><%= event.startime.strftime("%b #{event.startime.day.ordinalize}, %Y") %>
+          <span class="reduce_date_size"> <%= event.startime.strftime(" %I:%M %p") %>  </span></td>
+        <td class="text-left"><%= event.endtime.strftime("%b #{event.startime.day.ordinalize}, %Y ") %><span class="reduce_date_size"> <%= event.endtime.strftime(" %I:%M %p") %>  </span></td>
+        <td class="text-left"><%= event.amount %></td>
+        <td class="text-left"><%= event.venue %></td>
+        <% if current_user.category == "Admin" %>
+          <td class="text-left"><%= link_to 'Edit', edit_event_path(event) %></td>
+          <td class="text-left"><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

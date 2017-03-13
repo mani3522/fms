@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Users</h1>
+<hr>
+<div class="margintop30"></div>
+
+
+<%= form_tag users_path, :method => 'get', :id => 'users_search' do %>
+  <%= hidden_field_tag :direction, params[:direction] %>
+  <%= hidden_field_tag :sort, params[:sort] %>
+  <p>
+    <%= text_field_tag :search, params[:search], placeholder: "Search",class: "user_search_box"  %>
+  </p>
+<% end %>
+
+
+<div id="users">
+    <%= render 'users'%>
+    <%= will_paginate @users %>
+
+  </div>
+
+
+

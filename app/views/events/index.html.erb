@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+
+<h3>Events</h3>
+
+
+<%= form_tag events_path, :method => 'get', :id => 'events_search' do %>
+  <%= hidden_field_tag :direction, params[:direction] %>
+  <%= hidden_field_tag :sort, params[:sort] %>
+  <p>
+    <%= text_field_tag :search, params[:search], placeholder: "Search",class: "user_search_box"  %>
+  </p>
+<% end %>
+
+
+<div id="events">
+  <%= render 'events'%>
+  <%= will_paginate @events %>
+</div>
+
+
+

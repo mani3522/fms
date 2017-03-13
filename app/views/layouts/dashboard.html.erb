@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Freshevent</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div style="width:800px;margin:auto">
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "sample app", root_path, id: "logo" %>
+      <nav>
+        <ul class="nav pull-right">
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Help", root_path %></li>
+          
+            <li><%= link_to "Users", '#' %></li>
+            <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Account <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li>Profile</li>
+                <li>Settings</li>
+                <li class="divider"></li>
+                <li>
+                  <%= link_to "Sign out", root_path, method: "delete" %>
+                </li>
+              </ul>
+            </li>
+          
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+<%= yield %>
+<%= debug(params) if Rails.env.development? %>
+</div>
+</body>
+</html>
+
+
+

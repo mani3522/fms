@@ -1,0 +1,62 @@
+<p id="notice"><%= notice %></p>
+
+<h3>Teams</h3>
+<hr>
+
+<div class="margintop30"></div>
+
+
+<table class="table-fill margintop30">
+  <thead>
+    <tr>
+      <th class="text-left">Name</th>
+      <th class="text-left">Manager</th>
+      <% if current_user.category == "Admin" %>
+        <th colspan="2" class="text-left alignC"> Actions</th>
+      <%end%>
+    </tr>
+  </thead>
+
+  <tbody class="table-hover">
+    <% @teams.each do |team| %>
+      <tr>
+        <td class="text-left">
+          <%if @team_ids.include? team.id %>
+            <img src=<%= image_path("team_present.png")%> class="team_present_img">
+          <%else%>
+          <span class="marginR20"></span>
+          <%end%>
+          <%= link_to team.name, team %>
+        </td>
+        <td class="text-left"><%= team.manager %></td>
+        
+        <%if current_user.category == 'Admin'%>
+          <td class="text-left"><%= link_to 'Edit', edit_team_path(team) %></td>
+          <td class="text-left"><%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<style>
+
+
+/*** Table Styles **/
+
+.table-fill {
+  background: white;
+  border-radius:3px;
+  border-collapse: collapse;
+  height: 320px;
+  margin: auto;
+  max-width: 600px;
+  padding:5px;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;
+}
+ 
+</style>

@@ -1,0 +1,24 @@
+
+Freshevent - To Handle events across Company
+-----------
+
+Tables & Relation:
+------------------
+
+	Users 		( has_many :eventusers , has_many :teamusers )
+	Teams 		( has_many :events, :through => :teamevents, has_many :teamusers )
+	Events 		( has_many :eventusers, has_many :teamevents )
+	Eventusers  ( belongs_to :event, belongs_to :user )
+	Teamusers   ( belongs_to :team, belongs_to :user )
+	Teamevents 	( belongs_to :event, belongs_to :team )
+
+Functions
+----------
+	1. Admin , User (Login , Logout , Signup Facilities)
+	2. Admin login has ability to create new team, and can add members to team
+	3. A event can be scheduled only by the admin.
+	4. Event can include  teams or individual members across teams.
+	5. Users who are invited to events only notified
+	6. If the same user is present across teams, only one invite will be shown
+	7. All Users can view their events and do actions related only to their events
+	8. Event responses of the individual users are recorded and described in event show page

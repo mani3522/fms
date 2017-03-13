@@ -1,0 +1,48 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.table-fill th .current {
+  padding-right: 35px;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-image: image-url("sort_both.png");
+  background-size: 30px 30px;
+}
+
+.table-fill th .asc {
+  background-image: image-url("sort_asc.png");
+  padding-right: 42px;
+  background-size: 36px 28px;
+
+}
+
+.table-fill th .desc {
+  background-image: image-url("sort_desc.png");
+  background-size: 24px 24px;
+}
+
+.table-fill {
+	a:hover {
+		color:white !important;
+	}
+}
+
+.table-fill {
+	th {
+		a {
+			color: #428bca !important;
+		}
+		
+		color: #428bca !important;
+	}
+}
+
+.user_search_box {
+	width: 245px !important;
+    border-radius: 2px !important; 
+    float: right ;
+}
+
+	

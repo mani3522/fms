@@ -1,0 +1,31 @@
+<table class="table-fill margintop30">
+  <thead>
+    <tr>
+      <th class="text-left"> <%= sortable "name","Name"%></th>
+      <th class="text-left"><%= sortable "empid", "Emp Id" %></th>
+      <th class="text-left"><%= sortable "dateofbirth", "DOB" %></th>
+      <th class="text-left"><%= sortable "gender", "Gender" %></th>
+      <th class="text-left"><%= sortable "category", "Role" %></th>
+      <% if current_user.category == "Admin" %>
+        <th colspan="2" class= "alignC">Actions</th>
+      <%end%>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+        <tr>
+        <td class="text-left"><%= link_to user.name.upcase, user %></td>
+        <td class="text-left"><%= user.empid.upcase %></td>
+        <td class="text-left"><%= user.dateofbirth.strftime("%b %d %Y") %></td>
+        <td class="text-left"><%= user.gender %></td>
+        <td class="text-left"><%= user.category %></td>
+        <% if current_user.category == "Admin" %>
+          <td class="text-left"><%= link_to 'Edit', edit_user_path(user) %></td>
+          <td class="text-left">
+            <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
