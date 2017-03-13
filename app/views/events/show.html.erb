@@ -3,7 +3,7 @@
       <span class="event_headline">
          <%= link_to @event.name, edit_event_path(@event) %>
          <%if @event.endtime < DateTime.now%>
-            <img src=<%= image_path("archive.png")%> class="marginL venue_img"> 
+            <img src=<%= image_path("archive.png")%> class="marginL venue_img">
             <span class="colorR event_text_align">
               Archived
             </span>
@@ -11,73 +11,72 @@
       </span>
       <hr>
     </div>
-    
+
 
     <div class="marginD5">
-      <img src=<%= image_path("venue.jpeg")%> class="venue_img"> 
+      <img src=<%= image_path("venue.jpeg")%> class="venue_img">
       <span class="event_text_align">
         <%= @event.venue.upcase %>
       </span>
+      <% if @event.amount > 0 %>
+          <img src=<%= image_path("india.png")%> class="venue_img india_img">
+          <span class="event_text_align">
+            <%=@event.amount%>
+          </span>
+      <%end%>
     </div>
-    
+
     <div class="marginD5">
-      <img src=<%= image_path("calendar_event.png")%> class="venue_img"> 
+      <img src=<%= image_path("calendar_event.png")%> class="venue_img">
       <span class="event_text_align">
-        <%= @event.startime.strftime("%B #{@event.startime.day.ordinalize},%Y %I:%M %p") %> - 
+        <%= @event.startime.strftime("%B #{@event.startime.day.ordinalize},%Y %I:%M %p") %> -
         <%= @event.endtime.strftime("%B #{@event.endtime.day.ordinalize},%Y %I:%M %p") %>
       </span>
     </div>
 
-    <% if @event.amount > 0 %> 
-      
-      <div class="marginD5">
-        <img src=<%= image_path("india.png")%> class="venue_img"> 
-        <span class="event_text_align">
-          <%=@event.amount%>
-        </span>
-      </div>
-    <%end%>
 </div>
-
 <br />
-<br />
-
 
 <div class="top_container">
+  <div style="width:300px;float:left;">
     <div class="invited_head">  Invited & Response </div>
-      <ul class="list-group user_act">
-           <li class="list-group-item">
-            <span class="label label-default label-pill pull-xs-right floatR marginR"><%= @invitation['total_accepted'].length  %> </span>
-            <span class="label label-default label-pill pull-xs-right floatR "> <%= @invitation['total_users'] %></span>
+    <ul class="list-group user_act">
+         <li class="list-group-item">
+          <span class="label label-default label-pill pull-xs-right floatR marginR"><%= @invitation['total_accepted'].length  %> </span>
+          <span class="label label-default label-pill pull-xs-right floatR "> <%= @invitation['total_users'] %></span>
 
-            Total Users
-          </li>
-      </ul>
-    </div>
-    <br />
-<%if @teamdetail.length > 0 %>  
-  <div class="event_team_head">
-    <div class="invited_head">  Teams: </div>
-    <ul class="list-group">
-      <% @teamdetail.each do |us| %>
-             <li class="list-group-item">
-              <span class="label label-default label-pill pull-xs-right floatR marginR"> 
-                <% if @team_response[us.id] %>
-                  <%= @team_response[us.id] %> 
-                <% else %>
-                 0
-                 <% end %>
-              </span>
-              <span class="label label-default label-pill pull-xs-right floatR "><%= @teamcount[us.id] %></span>
-
-               <%= us.name %>
-            </li>
-      <%end%>
+          Total Users
+        </li>
     </ul>
-<%else%>
-  <div> No Teams is invited for <%= @event.name%></div>
-<%end%>
+  </div>
+  <div style="width:300px;float:left;margin-left:20px;">
+    <%if @teamdetail.length > 0 %>
+      <div class="event_team_head">
+        <div class="invited_head">  Teams: </div>
+        <ul class="list-group">
+          <% @teamdetail.each do |us| %>
+                 <li class="list-group-item">
+                  <span class="label label-default label-pill pull-xs-right floatR marginR">
+                    <% if @team_response[us.id] %>
+                      <%= @team_response[us.id] %>
+                    <% else %>
+                     0
+                     <% end %>
+                  </span>
+                  <span class="label label-default label-pill pull-xs-right floatR "><%= @teamcount[us.id] %></span>
+
+                   <%= us.name %>
+                </li>
+          <%end%>
+        </ul>
+      <%else%>
+        <div> No Teams is invited for <%= @event.name%></div>
+      <%end%>
+    </div>
+  </div>
 </div>
+
+<div style="clear:both;"></div>
 <br />
 <div class="top_container">
 <% if @userdetail.length > 0 %>
@@ -85,13 +84,13 @@
 
   <% @userdetail.each do |us| %>
     <div class="event_user_container">
-      <div class="event_profile_img"> 
+      <div class="event_profile_img">
         <% if @invitation['total_accepted'].include?(us.id)%>
           <img src=<%= image_path("accept.png")%> class="event_user_img">
         <%elsif @invitation['total_declined'].include?(us.id)%>
           <img src=<%= image_path("event_declined.png")%> class="event_user_img">
         <%else%>
-        <img src=<%= image_path("waiting.png")%> class="event_user_img">
+        <img src=<%= image_path("pending.jpeg")%> class="event_user_img">
         <%end%>
       </div>
       <div class="event_event_user_details">
@@ -104,11 +103,6 @@
           <%= us.empid %>
         </div>
 
-        <div class="event_user_email">
-          <%= us.email %>
-        </div>
-
-   
       </div>
     </div>
 

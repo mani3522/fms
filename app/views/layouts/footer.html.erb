@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Freshevent</title>
+  <title>KCG</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <link href="https://fonts.googleapis.com/css?family=Rasa|Roboto+Slab" rel="stylesheet">
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -17,12 +17,12 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      
-      
-      <%= link_to 'FreshEvent', current_user , class: "navbar-brand"%>
+
+
+      <%= link_to 'KCG', current_user , class: "navbar-brand"%>
     </div>
 
-    
+
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 
@@ -30,12 +30,12 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Teams <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><%= link_to 'Show All Teams', teams_path%></li>
-            
+
             <%if current_user.category == 'Admin'%>
                 <li role="separator" class="divider"></li>
                 <li><%= link_to 'Add New Team', new_team_path %></li>
             <%end%>
-            
+
           </ul>
         </li>
 
@@ -45,7 +45,7 @@
             <li><%= link_to 'Show All Users', users_path%></li>
             <!-- <li role="separator" class="divider"></li> -->
             <!-- <li><%= link_to 'Add New User', new_user_path %></li> -->
-            
+
           </ul>
         </li>
 
@@ -61,9 +61,9 @@
         </li>
 
       </ul>
-      
+
       <ul class="nav navbar-nav navbar-right">
-        
+
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >
             <%= current_user.name %> <span class="caret"></span></a>
@@ -79,7 +79,7 @@
   </div><!-- /.container-fluid -->
 </nav>
 <div id ="time_div">
-  <%= Time.now.strftime("%a %b") %> <%= Time.now.day%> <%= Time.now.year%> 
+  <%= Time.now.strftime("%a %b") %> <%= Time.now.day%> <%= Time.now.year%>
   <span id ="clock"></span>
 </div>
 <%= flash_messages %>
@@ -112,10 +112,10 @@ function updateClock ( )
 
     // Compose the string for display
     var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
-    
-    
+
+
     $("#clock").html(currentTimeString);
-        
+
  }
 
 $(document).ready(function()

@@ -80,7 +80,7 @@ input[type=submit] {
 .profile_img {
     width: 150px;
     height: 150px;
-    float: left;    
+    float: left;
 }
 
 .user_img {
@@ -92,16 +92,16 @@ input[type=submit] {
 }
 .mt50 {
     margin-top:50px !important;
-    width:650px !important;    
+    width:650px !important;
     height:100px !important;
 }
 .user_details {
     float: right;
     height: 50px;
-    width: 700px; 
+    width: 700px;
     margin-top: 30px;
     font-size: 20px;
-    font-family: 'Rasa', serif; 
+    font-family: 'Rasa', serif;
 }
 .team_img {
     width:200px;
@@ -111,22 +111,22 @@ input[type=submit] {
 .edit_team {
     width:200px;
     text-align:center;
-    margin-top:10px;    
+    margin-top:10px;
 }
 
 .edit_user_link {
     width:150px;
-    text-align:center;   
+    text-align:center;
 }
 .members {
     padding-left: 0px;
-    font-size: 16px;  
-    font-weight:bold;  
+    font-size: 16px;
+    font-weight:bold;
 }
 .top_header {
     height: 150px;
     width: 100%;
-    background-color: #e8e5e5;    
+    background-color: #e8e5e5;
 }
 
 .list-group {
@@ -180,10 +180,10 @@ input[type=submit] {
 }
 
 .event_user_container {
-    
+
     margin: 10px;
-    width: 200px;
-    height: 250px;
+    width: 190px;
+    height: 200px;
     display: inline-block;
     text-align: center;
     border: 1px solid #d4cdcd;
@@ -196,13 +196,13 @@ input[type=submit] {
     margin-bottom:20px;
     margin-top:25px;
 }
-  
+
 
 
 .top_container {
-    width: 700px;
-    
-}  
+    width: 900px;
+    margin:auto;
+}
 
 .event_heading {
     margin-top:15px;
@@ -220,7 +220,7 @@ input[type=submit] {
 .invited_head {
     font-size: 16px;
     margin-bottom: 15px;
-    
+
     color:#428bca;
 }
 .event_head {
@@ -245,7 +245,7 @@ input[type=submit] {
 .event_text_align {
     font-size: 16px;
     color: rgba(72, 70, 70, 0.84);
-    
+
     font-family: verdana, arial, helvetica, sans-serif;
     margin-left:20px
 }
@@ -274,7 +274,7 @@ input[type=submit] {
     color:red;
 }
 .fresh_heading {
-    font-family: 'Rasa', serif;    
+    font-family: 'Rasa', serif;
 }
 
 .notification {
@@ -298,11 +298,11 @@ input[type=submit] {
 
 .event_headline {
     a {
-        font-size:38px;
+        font-size:28px;
         color: #428bca;
         font-family: verdana, arial, helvetica, sans-serif;
     }
-    
+
 }
 
 .venue_img {
@@ -323,6 +323,10 @@ input[type=submit] {
     margin-bottom:5px;
 }
 
+.india_img {
+  margin-left: 30px;
+  margin-right: -20px;
+}
 
 .change_action {
     font-size: 14px;
@@ -367,7 +371,7 @@ input[type=submit] {
   animation: float 5s infinite;
   margin-bottom:10px;
 }
- 
+
 th {
   color:#D5DDE5;;
   background:#1b1e24;
@@ -384,12 +388,12 @@ th {
 th:first-child {
   border-top-left-radius:3px;
 }
- 
+
 th:last-child {
   border-top-right-radius:3px;
   border-right:none;
 }
-  
+
 tr {
   border-top: 1px solid #C1C3D1;
   border-bottom-: 1px solid #C1C3D1;
@@ -398,14 +402,14 @@ tr {
   font-weight:normal;
   text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
 }
- 
+
 tr:hover td {
   background:#4E5066;
   color:#FFFFFF;
   border-top: 1px solid #22262e;
   border-bottom: 1px solid #22262e;
 }
- 
+
 tr:first-child {
   border-top:none;
 }
@@ -413,11 +417,11 @@ tr:first-child {
 tr:last-child {
   border-bottom:none;
 }
- 
+
 tr:nth-child(odd) td {
   background:#EBEBEB;
 }
- 
+
 tr:nth-child(odd):hover td {
   background:#4E5066;
 }
@@ -425,11 +429,11 @@ tr:nth-child(odd):hover td {
 tr:last-child td:first-child {
   border-bottom-left-radius:3px;
 }
- 
+
 tr:last-child td:last-child {
   border-bottom-right-radius:3px;
 }
- 
+
 td {
   background:#FFFFFF;
   padding:20px;
