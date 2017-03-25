@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h3>Github Users</h3>
+<hr>
+<div class="margintop30"></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @githubs.each do |github| %>
+      <tr>
+        <td><%= github.id %></td>
+        <td><%= link_to github.name, github %></td>
+        <td><%= link_to 'Edit', edit_github_path(github) %></td>
+        <td><%= link_to 'Destroy', github, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

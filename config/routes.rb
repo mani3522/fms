@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :githubs
   get 'sessions/new'
 
   resources :users

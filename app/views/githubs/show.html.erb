@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+
+  <br>
+  <strong>Username: </strong><%= @github.name %> <button type="button" class="btn btn-success" id='<%= @github.name %>'>Get Github Data</button>
+
+  <br><br>
+
+</p>
+<div id="result">
+</div>
+
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script type="text/javascript">
+$('.btn-success').click(function() {
+  var url = "https://api.github.com/users/"+this.id+"/repos";
+  var parent = $('#result');
+
+  var t =  '<table><tr><th>Id</th><th>Name</th><th>open issues</th><th>language</th><th>size</th><th>watchers_count</th></tr>'
+
+
+  $.ajax({
+      type : "GET",
+      url  : url,
+      success: function(msg) {
+        msg.forEach(function(i){
+
+          t+='<tr><td>'+i.id+'</td><td>'+i.name+'</td><td>'+i.open_issues_count+'</td><td>'+i.language+'</td><td>'+i.size+'kb</td><td>'+i.watchers_count+'</td></tr>';
+        });
+        t = t+'</table>';
+        $('#result').append(t);
+      },
+      error: function(msg) {
+        var error = '<div style="color:red;">User doesnot exist in github. Please enter correct user name !! </div>';
+        $('#result').append(error);
+      }
+  });
+});
+
+</script>
