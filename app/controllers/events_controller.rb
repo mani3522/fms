@@ -13,26 +13,26 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    
+
     @eventusers = Eventuser.where(:event_id => params[:id])
     @teamevents = Teamevent.where(:event_id => params[:id])
 
     @ids = []
     @eventusers.each do |p|
       @ids.push(p.user_id)
-    end  
-    @userdetail = User.where(id: @ids) 
+    end
+    @userdetail = User.where(id: @ids)
 
     @team_ids = []
     @teamevents.each do |p|
       @team_ids.push(p.team_id)
     end
-    @teamdetail = Team.where(id: @team_ids) 
+    @teamdetail = Team.where(id: @team_ids)
     @teamcount  = Teamuser.where(team_id: @team_ids).group(:team_id).count
     @team_response = Teamuser.joins("JOIN Eventusers ON Teamusers.user_id = Eventusers.user_id").
                       select("Eventusers.user_id").where(team_id: @team_ids).
                       where("Eventusers.status = 1 AND Eventusers.event_id = ?",params[:id]).group(:team_id).count
-    
+
 
     @accepted_count = []
     @declined_count = []
@@ -78,8 +78,8 @@ class EventsController < ApplicationController
             @team_event_entry.save
 
             @team_users = Teamuser.select("user_id").where(:team_id => te)
-            
-            
+
+
 
             @team_users.each do |tu|
               unless user_ids.include? tu.user_id.to_s
@@ -91,13 +91,13 @@ class EventsController < ApplicationController
 
         event_user_params.each do |te|
           if te.to_i > 0
-            unless user_ids.include? te  
+            unless user_ids.include? te
               user_ids.push(te)
             end
           end
         end
 
-        
+
 
         user_ids.each do |ui|
           @event_user_entry = Eventuser.new
@@ -163,7 +163,7 @@ class EventsController < ApplicationController
     def sort_column
       Event.column_names.include?(params[:sort]) ? params[:sort] : "name"
     end
-    
+
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
