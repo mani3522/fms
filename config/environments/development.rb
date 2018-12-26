@@ -8,7 +8,7 @@ config.action_mailer.delivery_method = :smtp
       :port => 587,
       :domain => 'localhost:3000',
       :user_name => "n.mani172@gmail.com",
-      :password => "freshdesk123@@@###",
+      :password => "**********",
       :authentication => :plain,
       :enable_starttls_auto => true
   }
